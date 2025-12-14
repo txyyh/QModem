@@ -166,7 +166,7 @@ jobs:
     continue-on-error: true
     strategy:
       matrix:
-        build_arch: ['arm64_ipk',"arm64_apk","x64_apk","x64_ipk","mmips_ipk","mmips_apk" ]
+        build_arch: ['arm64_ipk']
     runs-on: ubuntu-latest
     steps:
       - name: Install packages
@@ -259,6 +259,7 @@ jobs:
     needs: [job_build_qmodem, job_prepare]
     runs-on: ubuntu-latest
     if: ${{ needs.job_prepare.outputs.push_type == 'tag' }}
+    if: always()
     steps:
       - name: Download all artifacts
         uses: actions/download-artifact@v4
